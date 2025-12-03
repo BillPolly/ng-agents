@@ -1,0 +1,1 @@
+id: agent:agent-factorynname: AgentFactorynversion: 1npurpose: Build agents from natural language requirementsntags:n  - generationn  - meta-agentntools:n  - Readn  - WebSearchn  - AgentDiscoveryn
