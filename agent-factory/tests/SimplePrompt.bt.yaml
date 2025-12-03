@@ -1,0 +1,27 @@
+type: suite
+name: Simple Prompting Test
+description: Simple test to verify prompting handle works
+
+beforeAll:
+  sequence:
+    - getHandle: prompting
+    - log: "Got prompting handle"
+
+children:
+  - name: "should complete a simple prompt"
+    sequence:
+      - script: |
+          console.log('Testing simple completion...');
+          const startTime = Date.now();
+
+          const response = await blackboard.prompting.complete('Say "Hello World" in exactly 2 words.', {
+            maxTokens: 50
+          });
+
+          console.log('Response:', response);
+          console.log('Time:', Date.now() - startTime, 'ms');
+
+          blackboard.response = response;
+
+      - assert: "{{response}} !== undefined && {{response}} !== null"
+        message: "response should be defined"
