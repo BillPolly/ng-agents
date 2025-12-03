@@ -1,0 +1,1 @@
+name: ng-agentsndescription: Agent and Prompt Registry for Legionnnagents:n  - agent-factorynnprompts:n  - prompts/summarization/basicn
