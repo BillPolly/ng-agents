@@ -1,1 +1,39 @@
-id: agent:agent-factorynname: AgentFactorynversion: 1ndescription: README.mdnpurpose: Build agents from natural language requirementsntags:n  - generationn  - meta-agentn  - orchestratorntools:n  - Readn  - WebSearchn  - AgentDiscoverynsubAgents:n  - requirements-extractorn  - agent-designernprompts:n  checkProgress:n    template: "Check if the task {{taskName}} is complete. Current state: {{state}}"n    outputSchema:n      type: objectn      properties:n        done:n          type: booleann        reason:n          type: stringn      required:n        - donenbehaviorTree:n  type: sequencen  children:n    - type: subagentn      agentRef: agent:requirements-extractorn      outputUpdate:n        spec: "{{result}}"n    - type: subagentn      agentRef: agent:agent-designern      outputUpdate:n        design: "{{result}}"n
+id: agent:agent-factory
+name: AgentFactory
+version: 1
+description: README.md
+purpose: Build agents from natural language requirements
+tags:
+  - generation
+  - meta-agent
+  - orchestrator
+tools:
+  - Read
+  - WebSearch
+  - AgentDiscovery
+subAgents:
+  - requirements-extractor
+  - agent-designer
+prompts:
+  checkProgress:
+    template: "Check if the task {{taskName}} is complete. Current state: {{state}}"
+    outputSchema:
+      type: object
+      properties:
+        done:
+          type: boolean
+        reason:
+          type: string
+      required:
+        - done
+behaviorTree:
+  type: sequence
+  children:
+    - type: subagent
+      agentRef: agent:requirements-extractor
+      outputUpdate:
+        spec: "{{result}}"
+    - type: subagent
+      agentRef: agent:agent-designer
+      outputUpdate:
+        design: "{{result}}"
